@@ -1,9 +1,12 @@
+import BookList from "@/components/BookList";
+import BookOverview from "@/components/BookOverview";
 import { Button } from "@/components/ui/button";
 
 const Home = () => {
   return (
     <div>
-      <Button>click me!</Button>
+      <BookOverview/>
+      <BookList/>
     </div>
   );
 };
