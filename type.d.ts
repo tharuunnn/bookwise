@@ -1,4 +1,4 @@
-interface BooK {
+interface Book {
   id: number;
   title: string;
   author: string;
