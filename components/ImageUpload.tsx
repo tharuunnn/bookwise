@@ -1,4 +1,4 @@
-"usse client";
+"use client";
 import { toast } from "@/hooks/use-toast";
 import config from "@/lib/config";
 import { IKImage, IKUpload, ImageKitProvider } from "imagekitio-next";
@@ -66,7 +66,7 @@ const ImageUpload = ({
     >
       <IKUpload //coming in from ik sdk
         className="hidden"
-        ref={ikUploadRef}
+        ref={ikUploadRef} //the actual button (browse) is hidden so we use the ref to make a connection from the button below to simulte a button cick on this.
         onError={onError}
         onSuccess={onSuccess}
         fileName="test-upload.png"
@@ -78,7 +78,7 @@ const ImageUpload = ({
           e.preventDefault();
           if (ikUploadRef.current) {
             ikUploadRef.current?.click();
-          }
+          }//so we basically use current to connect to the ref above and check if it actually exists and then call the click on it.If you're why we are doing all this ip elements do not really have a lot of css properties.
         }}
       >
         <Image
