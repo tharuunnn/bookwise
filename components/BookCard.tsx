@@ -12,7 +12,6 @@ const BookCard = ({
   coverUrl,
   isLoanedBook = false,
 }: Book) => {
-  console.log("props:", { coverColor, coverUrl });
   return (
     <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
       <Link
