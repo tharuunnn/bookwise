@@ -1,7 +1,12 @@
+import { auth } from "@/auth";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-const layout = ({ children }: { children: ReactNode }) => {
+const layout = async ({ children }: { children: ReactNode }) => {
+  const session = await auth();
+
+  if (session) redirect("/"); //adding this line is what ensures that even when we open sign-in we get redirected to the home page
   return (
     <main className="auth-container">
       <section className="auth-form">

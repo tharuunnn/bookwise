@@ -21,7 +21,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
+import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ImageUpload from "./ImageUpload";
 
 interface Props<T extends FieldValues> {
@@ -37,6 +39,7 @@ export const AuthForm = <T extends FieldValues>({
   defaultValues,
   onSubmit,
 }: Props<T>) => {
+  const router = useRouter();
   const isSignIn = type === "SIGN_IN";
 
   const form: UseFormReturn<T> = useForm({
@@ -44,7 +47,25 @@ export const AuthForm = <T extends FieldValues>({
     defaultValues: defaultValues as DefaultValues<T>,
   });
 
-  const handleSubmit: SubmitHandler<T> = async (data) => {};
+  const handleSubmit: SubmitHandler<T> = async (data) => {
+    const result = await onSubmit(data);
+
+    if (result.success) {
+      toast({
+        title: "Success",
+        description: isSignIn
+          ? "You have successfully signed in"
+          : "You have successfully signed up",
+      });
+      router.push("/");
+    } else {
+      toast({
+        title: `Error ${isSignIn ? "signing in" : "signing up"}`,
+        description: result.error ?? "An error occured.", // why did retard not use ternary cause apparently some shit like 0 or "" can deemed as false ( if result.error = 0 /"") and instead of returning ""  it would return an error occurred
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">
