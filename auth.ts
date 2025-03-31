@@ -45,6 +45,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({  //so basically si
           email: user[0].email,
           name: user[0].fullName,
         } as User; //this info is essential for auth to set up the necessary jwt cookies
+
+        // so what ever  user related details is being returned here is added to something called session.user.
       },
     }),
   ],

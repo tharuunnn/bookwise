@@ -6,12 +6,12 @@ import { ReactNode } from "react";
 const Layout = async ({ children }: { children: ReactNode }) => {
   const session = await auth();
 
-  if (!session) redirect("/sign-in");
+  if (!session) redirect("/sign-in"); //when a user visits protected page (say the home page) it checks if session already exists if it does access if granted or redirected to sign in.
 
   return (
     <main className="root-container">
       <div className="mx-auto max-w-7xl">
-        <Header />
+        <Header session={session} />
         <div className="mt-20 pb-20">{children}</div>
       </div>
     </main>

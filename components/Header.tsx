@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import { cn, getInitials } from "@/lib/utils";
+import { Session } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 
-const Header = () => {
+const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
 
   return (
@@ -25,6 +26,16 @@ const Header = () => {
           >
             library
           </Link>
+        </li>
+
+        <li>
+          <Link href={"/my-profile"}></Link>
+          <Avatar>
+            <AvatarFallback className="bg-amber-100">
+              {getInitials(session?.user?.name || "IN")}
+              {/* line 49 - /auth.ts, session.user.name is retrieved from session.user */}
+            </AvatarFallback>
+          </Avatar>
         </li>
       </ul>
     </header>
