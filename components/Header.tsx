@@ -3,11 +3,12 @@ import { cn, getInitials } from "@/lib/utils";
 import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
 const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <header className="my-10 flex justify-between gap-5">
@@ -29,13 +30,14 @@ const Header = ({ session }: { session: Session }) => {
         </li>
 
         <li>
-          <Link href={"/my-profile"}></Link>
-          <Avatar>
-            <AvatarFallback className="bg-amber-100">
-              {getInitials(session?.user?.name || "IN")}
-              {/* line 49 - /auth.ts, session.user.name is retrieved from session.user */}
-            </AvatarFallback>
-          </Avatar>
+          <Link href={"/my-profile"}>
+            <Avatar>
+              <AvatarFallback className="bg-amber-100">
+                {getInitials(session?.user?.name || "IN")}
+                {/* line 49 - /auth.ts, session.user.name is retrieved from session.user */}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
         </li>
       </ul>
     </header>
