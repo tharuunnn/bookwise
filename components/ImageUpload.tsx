@@ -51,7 +51,7 @@ const ImageUpload = ({
 
   const onSuccess = (res: any) => {
     setFile(res);
-    onFileChange(res.filePath);
+    onFileChange(res.filePath); // the url which is retrieved from the imagekit is passed back to the parent so it can be used for something
     toast({
       title: "Image uploaded successfully",
       description: `${res.filePath} uploaded successfully!`,
@@ -78,7 +78,7 @@ const ImageUpload = ({
           e.preventDefault();
           if (ikUploadRef.current) {
             ikUploadRef.current?.click();
-          }//so we basically use current to connect to the ref above and check if it actually exists and then call the click on it.If you're why we are doing all this ip elements do not really have a lot of css properties.
+          }//so we basically use current to connect to the ref above and check if it actually exists and then call the click on it.If you're thinking why we are doing all this? ip elements do not really have a lot of css properties.
         }}
       >
         <Image

@@ -17,7 +17,7 @@ export const signInWithCredentials = async (
 
   const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
 
-  //headers is used in next server actions or api routes to fetch incoming requests. the x-forwarded-fo header consists of the client's ip address is not available defaults to local host
+  //headers is used in next server actions or api routes to fetch incoming requests. the x-forwarded-fo header consists of the client's ip address, if it is not available defaults to local host
 
   const { success } = await ratelimit.limit(ip);
 
@@ -61,8 +61,8 @@ export const signUp = async (params: AuthCredentials) => {
     .where(eq(users.email, email))
     .limit(1);
 
-  if (existingUser.length > 0) {
-    return { success: false, error: "User already exists" }; // why.length ? drizzle orm always resolves queries into arrays so we use this, also id you do not use await on the call then a promise will be returned.
+  if (existingUser.length > 0) { 
+    return { success: false, error: "User already exists" }; // why.length ? drizzle orm always resolves queries into arrays so we use this, also if you do not use await on the call then a promise will be returned.
   }
 
   const hashedPassword = await hash(password, 10);
@@ -81,10 +81,10 @@ export const signUp = async (params: AuthCredentials) => {
       body: {
         email,
         fullName,
-      }
+      },
     });
 
-    await signInWithCredentials({ email, password });
+    await signInWithCredentials({ email, password }); // gets called to sign in the user with the credentials they provided instead of having to sign in again.
 
     return { success: true };
   } catch (error) {

@@ -29,8 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({  //so basically si
           .select()
           .from(users)
           .where(eq(users.email, credentials.email.toString()))
-          .limit(1); //eq -> equals and is comparing the one recieved and the actual info. See in jwt every request is sent with the info since the web is stateless and then the server verifies the info in the cookie with the one in credentials.
-
+          .limit(1); //eq -> equals, it looks for credentials.email (param) in users.email. 
         if (user.length === 0) return null; //basically if user doesn't exist
 
         const isPasswordValid = await compare(

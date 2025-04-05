@@ -8,8 +8,6 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 
 const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
-  const router = useRouter();
-
   return (
     <header className="my-10 flex justify-between gap-5">
       <Link href="/">

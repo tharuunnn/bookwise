@@ -39,7 +39,7 @@ const getUserState = async (email: string): Promise<UserState> => {
 };
 
 export const { POST } = serve<InitialData>(async (context) => {
-  const { email, fullName } = context.requestPayload;
+  const { email, fullName } = context.requestPayload; // it is a i post request it signfies the post coming in from the trigger (endpoint) of workFlowClient
 
   //Welcome Email
   await context.run("new-signup", async () => {
@@ -78,3 +78,6 @@ export const { POST } = serve<InitialData>(async (context) => {
     await context.sleep("wait-for-1-month", 60 * 60 * 24 * 30);
   }
 });
+
+//btw for workflows you need a public domain
+//user signup  -> triggers workflow ->workflow post request is sent here which then calls the sendEmail function -> sendEmail has qstash publish which queues the email to be sent (the other emails are in this code and get added with timers) -> resend email is called within the sendemail fn which sends the mail
