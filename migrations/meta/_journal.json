@@ -15,6 +15,13 @@
       "when": 1745050301557,
       "tag": "0001_good_morg",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1745074837827,
+      "tag": "0002_omniscient_barracuda",
+      "breakpoints": true
     }
   ]
 }
