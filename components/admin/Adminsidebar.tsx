@@ -27,8 +27,10 @@ const Adminsidebar = ({ session }: { session: Session }) => {
             const isSelected =
               (link.route !== "/admin" &&
                 pathname.includes(link.route) &&
-                link.route.length > 1) ||
+                link.route.length > 1)  ||
               pathname === link.route; //this is how you check if the link is selected.
+
+              //for the first part of the above condition it is mapping through the links to find if the link.route is a part of the pathname, say admin/books/papers which is a part of admin/books so in this case the admin/books stays highlighted. The reason admin is excluded is because all pages have admin in their routes which might end up selecting home instead.
 
             return (
               <Link href={link.route} key={link.route}>
