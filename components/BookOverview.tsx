@@ -2,10 +2,10 @@ import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import Image from "next/image";
-import BorrowBook from "./BorrowBook";
 import BookCover from "./BookCover";
+import BorrowBook from "./BorrowBook";
 
-interface Props extends Book{
+interface Props extends Book {
   userId: string;
 }
 
@@ -22,12 +22,19 @@ const BookOverview = async ({
   id,
   userId,
 }: Props) => {
-  const [user] = await db.select().from(users).where(eq(users.id, userId)).limit(1);
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
 
   const borrowingEligibility = {
-    isEligible: availableCopies>0 && user?.status === 'APPROVED',
-    message: availableCopies <= 0 ? 'Book is not availble' : 'You are not eligible to borrow the book',
-  }
+    isEligible: availableCopies > 0 && user?.status === "APPROVED",
+    message:
+      availableCopies <= 0
+        ? "Book is not availble"
+        : "You are not eligible to borrow the book",
+  };
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">
@@ -56,7 +63,13 @@ const BookOverview = async ({
           </p>
         </div>
         <p className="book-description">{summary}</p>
-      {!user  && <BorrowBook bookId={id} userId={userId} borrowingEligibility={borrowingEligibility}/>}
+        {user?.status === "APPROVED" && (
+          <BorrowBook
+            bookId={id}
+            userId={userId}
+            borrowingEligibility={borrowingEligibility}
+          />
+        )}
       </div>
 
       <div className="relative flex flex-1 justify-center">
