@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📚 Bookwise
 
-## Getting Started
+A full-stack library management platform built with Next.js, TypeScript, and Drizzle ORM, featuring book borrowing, admin dashboards, email notifications, and rate-limited APIs.
 
-First, run the development server:
+🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Next.js 14 (App Router)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+TypeScript
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+TailwindCSS + ShadCN
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Drizzle ORM + Neon PostgreSQL
 
-## Learn More
+Upstash Redis (Rate Limiting)
 
-To learn more about Next.js, take a look at the following resources:
+Resend (Transactional Emails)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ImageKit (Media Optimization)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+QStash (Background Jobs)
 
-## Deploy on Vercel
+NextAuth (Authentication)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🛠️ Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repo
+   git clone https://github.com/yourusername/bookwise.git
+   cd bookwise
+
+2. Install dependencies
+   pnpm install
+
+3. Configure environment variables
+
+Create a file named .env.local in the root of the project and add the following content:
+
+# ImageKit
+
+IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
+IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
+IMAGEKIT_URL_ENDPOINT=your_imagekit_url_endpoint
+
+# Public API URL
+
+NEXT_PUBLIC_API_URL=http://localhost:3000
+
+# Neon Postgres
+
+DATABASE_URL=your_neon_postgres_database_url
+
+# Upstash Redis (Rate Limiting)
+
+UPSTASH_REDIS_REST_URL=your_upstash_redis_rest_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_rest_token
+
+# Resend
+
+RESEND_API_KEY=your_resend_api_key
+
+# QStash
+
+QSTASH_URL=your_qstash_url
+QSTASH_TOKEN=your_qstash_token
+
+4. Start the development server
+   pnpm dev
+
+5. Open your browser and visit http://localhost:3000 to see the application in action.
